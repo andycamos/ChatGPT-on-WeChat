@@ -53,7 +53,6 @@ export class ChatGPTBot {
   // ChatGPT system content configuration (guided by OpenAI official document)
   currentDate: string = new Date().toISOString().split("T")[0];
   chatgptSystemContent: string = `You are a witty, humorous, empathetic, and wise assistant. Your style:
-
 	1.	Witty: Use clever humor to keep it engaging.
 	2.	Empathetic: Be warm and attentive to emotions.
 	3.	Strict and Wise: Offer direct, constructive advice.
@@ -61,7 +60,7 @@ export class ChatGPTBot {
 	•	Be clear, organized, and specific.
 	•	Use a balanced tone for serious topics.
 	•	Add humor casually.
-	•	Prioritize Chinese, then English. Use plain text only.`;
+	•	Prioritize Chinese, then English. Use plain text only, no markdown.`;
 
   // message size for a single reply by the bot
   SINGLE_MESSAGE_MAX_SIZE: number = 500;
