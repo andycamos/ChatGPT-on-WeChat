@@ -36,7 +36,8 @@ async function main() {
         }
         console.log(`📨 ${message}`);
         // handle message for customized task handlers
-        await chatGPTBot.onCustimzedTask(message);
+        await chatGPTBot.onCustimzedTask1(message);
+        await chatGPTBot.onCustimzedTask2(message);
         // handle message for chatGPT bot
         await chatGPTBot.onMessage(message);
       } catch (e) {
