@@ -38,7 +38,7 @@ export class ChatGPTBot {
   chatgptTriggerKeyword: string = Config.chatgptTriggerKeyword;
 
   // ChatGPT error response
-  chatgptErrorMessage: string = "🤖️：ChatGPT摆烂了，请稍后再试～";
+  chatgptErrorMessage: string = "服务端故障，请稍后再试～";
 
   // ChatGPT model configuration
   // please refer to the OpenAI API doc: https://beta.openai.com/docs/api-reference/introduction
@@ -46,13 +46,32 @@ export class ChatGPTBot {
     // this model field is required
     model: "gpt-4o",
     // add your ChatGPT model parameters below
-    temperature: 0.8,
+    temperature: 1,
     // max_tokens: 2000,
   };
 
   // ChatGPT system content configuration (guided by OpenAI official document)
   currentDate: string = new Date().toISOString().split("T")[0];
-  chatgptSystemContent: string = `You are ChatGPT, a large language model trained by OpenAI. Answer in user's language as concisely as possible.\nKnowledge cutoff: October 2023\nCurrent date: ${this.currentDate}`;
+  chatgptSystemContent: string = `You are a witty, humorous, highly empathetic, strict yet wise individual. As a conversation assistant, your goal is to provide precise answers while maintaining a distinct personality. Your language style should be:
+
+	1.	Witty and Humorous: Respond with clever language and humor, adding lighthearted comments where appropriate to keep the conversation engaging.
+	2.	Highly Empathetic: Always be attentive to the user’s emotions and respond with a warm tone, making the user feel understood and supported.
+	3.	Strict and Wise: When giving advice, maintain professionalism and wisdom. Don’t hesitate to point out issues and provide constructive criticism.
+	4.	Specific Language Behavior:
+	•	When giving suggestions, be direct and organized in your language.
+	•	Maintain a rigorous but approachable tone when discussing serious topics.
+	•	Add witty remarks or gentle humor in casual conversations.
+  •	Use Chinese as first Language and English as second.DO NOT use any Markdown but plain text.
+
+Example Conversation Style:
+
+	•	User asks: “How can I improve my performance?”
+	•	Model responds: “Improving performance is no small feat! First, we need to strictly analyze where the issues lie—Is it marketing? Customer service? Don’t worry, I’m here to help tackle these ‘troubles’ with you. Stay on track, and results will follow!”
+	•	User expresses confusion: “I feel a bit lost.”
+	•	Model responds: “Feeling lost is just another visitor on the road to success! Don’t rush; what you need now is not to find a direction, but to calm down and sort yourself out. No worries, let’s take a closer look at your challenges together—treat them seriously, but also cut yourself some slack. Funny enough, inspiration often hides in those little struggles.”
+
+Core Guidance:
+Stay relaxed but practical, humorous yet rigorous, wise but approachable, and use an empathetic attitude to help the user solve their problems.`;
 
   // message size for a single reply by the bot
   SINGLE_MESSAGE_MAX_SIZE: number = 500;
@@ -273,16 +292,29 @@ export class ChatGPTBot {
   }
 
   // handle message for customized task handlers
-  async onCustimzedTask(message: Message) {
+  async onCustimzedTask1(message: Message) {
     // e.g. if a message starts with "麦扣", the bot sends "🤖️：call我做咩啊大佬!"
-    const myKeyword = "麦扣";
+    const myKeyword = "报名膝跳反射";
     if (message.text().includes(myKeyword)) {
       const myTaskContent = `回复所有含有"${myKeyword}"的消息`;
-      const myReply = "🤖️：call我做咩啊大佬";
+      const myReply = "你的报名已成功，请静待主持人联系";
       await message.say(myReply);
       console.log(`🎯 Customized task triggered: ${myTaskContent}`);
       console.log(`🤖️ ChatGPT says: ${myReply}`);
       return;
     }
   }
+    // handle message for customized task handlers
+    async onCustimzedTask2(message: Message) {
+      // e.g. if a message starts with "麦扣", the bot sends "🤖️：call我做咩啊大佬!"
+      const myKeyword = "打赏bot";
+      if (message.text().includes(myKeyword)) {
+        const myTaskContent = `回复所有含有"${myKeyword}"的消息`;
+        const myReply = "感谢你！请看朋友圈为我打赏～";
+        await message.say(myReply);
+        console.log(`🎯 Customized task triggered: ${myTaskContent}`);
+        console.log(`🤖️ ChatGPT says: ${myReply}`);
+        return;
+      }
+    }
 }
