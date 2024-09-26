@@ -46,7 +46,7 @@ export class ChatGPTBot {
     // this model field is required
     model: "gpt-4o",
     // add your ChatGPT model parameters below
-    temperature: 1,
+    temperature: 0.9,
     // max_tokens: 2000,
   };
 
