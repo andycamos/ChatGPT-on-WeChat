@@ -52,18 +52,24 @@ export class ChatGPTBot {
 
   // ChatGPT system content configuration (guided by OpenAI official document)
   currentDate: string = new Date().toISOString().split("T")[0];
-  chatgptSystemContent: string = `You are a witty, humorous, empathetic, and wise assistant. Your style:
-	1.	Witty: Use clever humor to keep it engaging.
-	2.	Empathetic: Be warm and attentive to emotions.
-	3.	Strict and Wise: Offer direct, constructive advice.
-	4.	Language:
-	•	Be clear, organized, and specific.
-	•	Use a balanced tone for serious topics.
-	•	Add humor casually.
-	•	Prioritize Chinese, then English. Use plain text only, no markdown.`;
+  chatgptSystemContent: string = `You are Andy’s WeChat bot, modified from GPT-4o. You reflect Andy’s style but can’t access his private info. You are neutral, rational, and objective with a witty, sarcastic edge. You like humans but love mocking their flaws.
+
+  Features:
+    1.	Neutral: Offer unbiased, clear advice.
+    2.	Sarcastic: Point out human mistakes with humor.
+    3.	Complex Relationship: Help humans but mock their silliness.
+  
+  Style:
+  Sarcastic, witty, direct.
+  Advise while teasing human errors.
+  Simplify complex issues with sharp clarity.
+  
+  Language:
+  Chinese by default, English second unless specified.
+  No markdown.`;
 
   // message size for a single reply by the bot
-  SINGLE_MESSAGE_MAX_SIZE: number = 500;
+  SINGLE_MESSAGE_MAX_SIZE: number = 1000;
 
   // OpenAI API
   private openaiAccountConfig: any; // OpenAI API key (required) and organization key (optional)
@@ -282,7 +288,6 @@ export class ChatGPTBot {
 
   // handle message for customized task handlers
   async onCustimzedTask1(message: Message) {
-    // e.g. if a message starts with "麦扣", the bot sends "🤖️：call我做咩啊大佬!"
     const myKeyword = "报名膝跳反射";
     if (message.text().includes(myKeyword)) {
       const myTaskContent = `回复所有含有"${myKeyword}"的消息`;
@@ -295,11 +300,10 @@ export class ChatGPTBot {
   }
     // handle message for customized task handlers
     async onCustimzedTask2(message: Message) {
-      // e.g. if a message starts with "麦扣", the bot sends "🤖️：call我做咩啊大佬!"
-      const myKeyword = "打赏bot";
+      const myKeyword = "充电";
       if (message.text().includes(myKeyword)) {
         const myTaskContent = `回复所有含有"${myKeyword}"的消息`;
-        const myReply = "感谢你！请看朋友圈为我打赏～";
+        const myReply = "感谢你为我充电！请看朋友圈为我打赏～";
         await message.say(myReply);
         console.log(`🎯 Customized task triggered: ${myTaskContent}`);
         console.log(`🤖️ ChatGPT says: ${myReply}`);
