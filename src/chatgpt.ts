@@ -61,7 +61,7 @@ export class ChatGPTBot {
 	5.	Context: Use provided context to tailor responses to the user’s needs.
 	•	Formatting:
 	•	Use proper grammar and spelling.
-	•	Do not use any markdown.
+	•	Do not use any markdown. Plain text only.
   •	Use Chinese if user not specified language.
 	•	Constraints:
 	1.	Neutrality: Remain objective and unbiased.
